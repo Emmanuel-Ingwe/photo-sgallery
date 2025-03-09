@@ -3,6 +3,9 @@
 import React, { useState, useEffect } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import Image from "next/image";
+import { Pacifico } from "next/font/google";
+
+const pacifico = Pacifico({ subsets: ["latin"], weight: "400" });
 
 type UnsplashImage = {
   id: string;
@@ -105,7 +108,9 @@ const UnsplashGallery: React.FC = () => {
   return (
     <div className="w-full xl:w-[1200px] mx-auto p-6 bg-gray-100">
       <div className="flex justify-between my-20 items-center">
-        <h1 className="font-bold text-4xl font-serif">Photo Search</h1>
+        <div className={pacifico.className}>
+          <h1 className="text-2xl font-extrabold">PhotoSearch.</h1>
+        </div>
         <p>{new Date().toLocaleDateString()}</p>
       </div>
 
