@@ -12,7 +12,7 @@ type UnsplashImage = {
   likeCount: number;
 };
 
-const UNSPLASH_ACCESS_KEY = process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY;
+const ACCESS_KEY = process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY;
 
 const fetchImages = async ({
   queryKey,
@@ -23,13 +23,13 @@ const fetchImages = async ({
 }) => {
   const [, query] = queryKey;
   const endpoint = query
-    ? `https://api.unsplash.com/search/photos?query=${query}&page=${pageParam}&per_page=15&client_id=${UNSPLASH_ACCESS_KEY}`
-    : `https://api.unsplash.com/photos?page=${pageParam}&per_page=15&client_id=${UNSPLASH_ACCESS_KEY}`;
+    ? `https://api.unsplash.com/search/photos?query=${query}&page=${pageParam}&per_page=15&client_id=${ACCESS_KEY}`
+    : `https://api.unsplash.com/photos?page=${pageParam}&per_page=15&client_id=${ACCESS_KEY}`;
 
   const res = await fetch(endpoint);
 
   if (!res.ok) {
-    throw new Error("Failed to fetch images");
+    throw new Error("couldn't fetch images");
   }
 
   const data = await res.json();
@@ -196,6 +196,10 @@ const UnsplashGallery: React.FC = () => {
           </button>
         </div>
       )}
+
+      <div className="text-center mt-8 text-gray-500">
+        2025 ❤️ by Emmanuel Ingwe &copy;
+      </div>
     </div>
   );
 };
