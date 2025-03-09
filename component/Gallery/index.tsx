@@ -88,7 +88,6 @@ const UnsplashGallery: React.FC = () => {
 
   const images = data?.pages.flat() || [];
 
-  // Debounce logic
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedQuery(query);
@@ -106,7 +105,7 @@ const UnsplashGallery: React.FC = () => {
   return (
     <div className="w-full xl:w-[1200px] mx-auto p-6 bg-gray-100">
       <div className="flex justify-between my-20 items-center">
-        <h1 className="font-bold text-4xl">Photo Search</h1>
+        <h1 className="font-bold text-4xl font-serif">Photo Search</h1>
         <p>{new Date().toLocaleDateString()}</p>
       </div>
 
@@ -117,19 +116,19 @@ const UnsplashGallery: React.FC = () => {
           placeholder="Search images..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="p-2 rounded-md border border-gray-300 w-full"
+          className="p-1 rounded-md border bg-white border-gray-300 w-full"
         />
         <button
           type="submit"
-          className="px-4 cursor-pointer py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+          className="px-4 cursor-pointer py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600">
           Search
         </button>
       </form>
 
-      <h2 className="text-2xl py-3">
+      <h2 className="text-2xl py-3 mt-10">
         Showing results for{" "}
         <span className="font-bold font-serif underline">
-          {debouncedQuery || "default"}
+          {debouncedQuery || " "}
         </span>
       </h2>
 
