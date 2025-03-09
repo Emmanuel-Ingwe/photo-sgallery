@@ -10,3 +10,5 @@ type UnsplashImage = {
   authorImage: string;
   likeCount: number;
 };
+
+const UNSPLASH_ACCESS_KEY = process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY;
