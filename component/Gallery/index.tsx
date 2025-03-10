@@ -106,12 +106,18 @@ const UnsplashGallery: React.FC = () => {
   };
 
   return (
-    <div className="w-full xl:w-[1200px] mx-auto p-6 bg-gray-100">
+    <div className="w-full xl:w-[1100px] mx-auto p-6 bg-gray-100">
       <div className="flex justify-between my-20 items-center">
         <div className={pacifico.className}>
           <h1 className="text-2xl font-extrabold">PhotoSearch.</h1>
         </div>
-        <p>{new Date().toLocaleDateString()}</p>
+        <p>
+          {new Date().toLocaleDateString("en-US", {
+            weekday: "long",
+            month: "short",
+            year: "numeric",
+          })}
+        </p>
       </div>
 
       {/* Search */}
@@ -121,7 +127,7 @@ const UnsplashGallery: React.FC = () => {
           placeholder="Search images..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="p-1 rounded-md border bg-white border-gray-300 w-full"
+          className="p-1 rounded-md border outline-blue-600 bg-white border-gray-300 w-full"
         />
         <button
           type="submit"
@@ -131,7 +137,7 @@ const UnsplashGallery: React.FC = () => {
       </form>
 
       <h2 className="text-2xl py-3 mt-10">
-        Showing results for{" "}
+        Showing results for {".."}
         <span className="font-bold font-serif underline">
           {debouncedQuery || " "}
         </span>
@@ -152,7 +158,7 @@ const UnsplashGallery: React.FC = () => {
         {images.map((image: UnsplashImage) => (
           <div
             key={image.id}
-            className="w-full bg-gray-200 rounded-2xl shadow mx-auto relative">
+            className="w-full bg-gray-100 rounded-2xl shadow mx-auto relative">
             {/* Image */}
             <Image
               src={image.imageUrl}
@@ -163,22 +169,24 @@ const UnsplashGallery: React.FC = () => {
               className="w-full rounded-t-2xl h-56 object-cover"
             />
 
-            <div className="absolute top-2 right-2 bg-white bg-opacity-75 text-black px-2 py-1 rounded-full text-sm">
+            <div className="absolute top-3 right-3 bg-white bg-opacity-75 text-black px-2 py-1 rounded-full text-xs">
               ❤️ {image.likeCount}
             </div>
 
             {/* Author */}
             <div className="p-4">
               <div className="flex justify-between items-center gap-4">
-                <Image
-                  src={image.authorImage}
-                  alt={image.authorName}
-                  width={40}
-                  height={40}
-                  className="w-10 h-10 rounded-full object-cover border"
-                />
+                <div className="border-2 rounded-full">
+                  <Image
+                    src={image.authorImage}
+                    alt={image.authorName}
+                    width={40}
+                    height={40}
+                    className="w-7 h-7 rounded-full object-cover"
+                  />
+                </div>
                 <div>
-                  <h3>{image.authorName}</h3>
+                  <h3 className="text-gray-900 text-sm">{image.authorName}</h3>
                 </div>
               </div>
             </div>
@@ -187,22 +195,24 @@ const UnsplashGallery: React.FC = () => {
       </div>
 
       {hasNextPage && (
-        <div className="text-center mt-8">
+        <div className="text-center font-bold text-sm mt-8">
           <button
             onClick={() => fetchNextPage()}
             disabled={isFetchingNextPage}
-            className={`px-4 cursor-pointer py-2 rounded-md ${
+            className={`px-2 cursor-pointer py-1 rounded-md border border-gray-300 ${
               isFetchingNextPage
                 ? "bg-gray-300 cursor-not-allowed"
-                : "bg-blue-500 text-white hover:bg-blue-600"
+                : "bg-white text-black hover:bg-blue-600"
             }`}>
             {isFetchingNextPage ? "Loading..." : "Load More"}
           </button>
         </div>
       )}
 
-      <div className="text-center mt-8 text-gray-500">
-        2025 ❤️ by Emmanuel Ingwe &copy;
+      <div className="text-center mt-8 text-gray-500 font-bold">
+        <div className={pacifico.className}>
+          &copy; 2025 ❤️ by Emmanuel Ingwe
+        </div>
       </div>
     </div>
   );
